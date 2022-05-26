@@ -7,10 +7,9 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginTest {
-
+public class LoginFailTest {
     @Test
-    public void loginTest() throws InterruptedException {
+    public void loginFailTest() throws InterruptedException {
         System.setProperty("webdriver.gecko.driver","/Users/mrk/Desktop/geckodriver.exe");
 
         //Create firefox driver's instance
@@ -31,7 +30,7 @@ public class LoginTest {
 
         WebElement passwordEdittext = driver.findElement(By.id("rcmloginpwd"));
         passwordEdittext.clear();
-        passwordEdittext.sendKeys("Kavlak12.");
+        passwordEdittext.sendKeys("Kavlak121.");
         System.out.println("Password input filling");
         Thread.sleep(5000);
 
@@ -54,6 +53,4 @@ public class LoginTest {
         Thread.sleep(10000);
         driver.quit();
     }
-
-
 }

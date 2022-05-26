@@ -1,6 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.Test;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -10,19 +11,21 @@ public class seleniumBasicCommands {
 
     public static void main(String Args[]) throws InterruptedException, ParseException {
         System.setProperty("webdriver.gecko.driver","/Users/mrk/Desktop/geckodriver.exe");
+        //System.setProperty("webdriver.chromedriver.driver" "")
 
         //Create firefox driver's instance
         WebDriver driver = new FirefoxDriver();
 
         //Set implicit wait of 10 seconds
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         //Launch hepsiburada
         driver.get("https://www.hepsiburada.com/iphone-12-128-gb-p-HBV00000YDZXL");
         String iphoneFromHb = driver.findElement(By.xpath("/html/body/div[2]/main/div[3]/section[1]/div[6]/div/div[4]/div[1]/div[2]/div/div[1]/div[1]")).getText();
         System.out.println(iphoneFromHb);
 
         Thread.sleep(5000);
+
+        //17.599,00 TL 17599900.0
 
         String parsedValueHB = iphoneFromHb.split("TL")[0].trim().replace(".", "").replace(",","");
         double priceFromHbFormatted = Double.parseDouble(parsedValueHB);
@@ -63,8 +66,13 @@ public class seleniumBasicCommands {
         iphoneList.add(gittiGidiyor);
         iphoneList.add(trendyol);
 
+        Iphone emptyIphone = new Iphone(0, "");
+
         Iphone highestPriceIphone;
-        highestPriceIphone = trendyol;
+        highestPriceIphone = emptyIphone;
+
+        Iphone cheapestPriceIphone;
+        cheapestPriceIphone = hepsiburada;
 
         double totalPrice = 0.0;
         double averagePrice = 0.0;
@@ -78,9 +86,15 @@ public class seleniumBasicCommands {
             if(iphoneList.get(i).price > highestPriceIphone.price){
                 highestPriceIphone = iphoneList.get(i);
             }
+
+            if(iphoneList.get(i).price < cheapestPriceIphone.price){
+                cheapestPriceIphone = iphoneList.get(i);
+            }
+
         }
 
-        System.out.println("EN PAHALISI: "+ highestPriceIphone.marketName );
+        System.out.println("EN PAHALISI: " + highestPriceIphone.marketName + "FİYATI: " + highestPriceIphone.price );
+        System.out.println("EN UCUZU: " + cheapestPriceIphone.marketName + "FİYATI: " + cheapestPriceIphone.price);
 
         Thread.sleep(50000);
 

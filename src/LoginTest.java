@@ -1,6 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,10 +12,14 @@ public class LoginTest {
 
     @Test
     public void loginTest() throws InterruptedException {
-        System.setProperty("webdriver.gecko.driver","/Users/mrk/Desktop/geckodriver.exe");
+        //System.setProperty("webdriver.gecko.driver","/Users/mrk/Desktop/geckodriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/Users/mrk/Desktop/chromedriver.exe");
 
         //Create firefox driver's instance
-        WebDriver driver = new FirefoxDriver();
+        //WebDriver driver = new FirefoxDriver();
+
+        //Create chrome driver's instance
+        WebDriver driver = new ChromeDriver();
 
         //Set implicit wait of 10 seconds
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

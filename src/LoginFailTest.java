@@ -1,6 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,10 +11,14 @@ import java.util.concurrent.TimeUnit;
 public class LoginFailTest {
     @Test
     public void loginFailTest() throws InterruptedException {
-        System.setProperty("webdriver.gecko.driver","/Users/mrk/Desktop/geckodriver.exe");
+        //System.setProperty("webdriver.gecko.driver","/Users/mrk/Desktop/geckodriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/Users/mrk/Desktop/chromedriver.exe");
 
         //Create firefox driver's instance
-        WebDriver driver = new FirefoxDriver();
+        //WebDriver driver = new FirefoxDriver();
+
+        //Create chrome driver's instance
+        WebDriver driver = new ChromeDriver();
 
         //Set implicit wait of 10 seconds
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -43,11 +48,11 @@ public class LoginFailTest {
 
         String actualUrl = driver.getCurrentUrl();
 
-        Assert.assertEquals(actualUrl,expectedUrl,"Page url doesnt match. User failed to logged in");
+        Assert.assertNotSame(actualUrl, expectedUrl, "Page url matches. User logged in successfully");
 
-        System.out.println("The page url has been successfully verified");
+        System.out.println("Page url doesnt match. User failed to logged in");
 
-        System.out.println("User logged in successfully");
+        System.out.println("Fail test passed");
 
         //Sleep 10 seconds before quit
         Thread.sleep(10000);
